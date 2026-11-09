@@ -1,0 +1,68 @@
+{
+  "expo": {
+    "name": "SlowSpark",
+    "slug": "slowspark",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "slowspark",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#FBF6EF"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.slowspark.app",
+      "googleServicesFile": "./GoogleService-Info.plist"
+    },
+    "android": {
+      "package": "com.slowspark.app",
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "backgroundColor": "#FBF6EF",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"],
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font",
+      "expo-secure-store",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FBF6EF"
+        }
+      ],
+      "@react-native-community/datetimepicker",
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth",
+      "@react-native-google-signin/google-signin",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "SlowSpark needs your photos so you can add them to your profile."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "SlowSpark uses your location to show people near you."
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ]
+    ]
+  }
+}
