@@ -88,19 +88,20 @@ every working session (section 6 and 7 especially).
 
 **Verification status — important:**
 - Mobile: `npx tsc --noEmit` passes and `expo export --platform android` bundles successfully.
-- **Backend has NEVER been compiled or run** (Maven Central was not reachable in the earlier
-  environment; only a Java syntax check was done). Expect possible compile/runtime fixes,
-  especially around Spring Boot 4 / Hibernate 7 specifics.
-- Nothing has been tested end-to-end on a phone yet.
+- **Backend compiled and ran on 2026-11-09** (Java 21, Spring Boot 4.0.0, Hibernate 7.1.8, PostgreSQL 16):
+  `mvn compile` passed with no errors, Flyway applied V1+V2, `ddl-auto: validate` passed, Tomcat started.
+  No code changes were needed.
+- **API smoke test passed** with dev-login (two users): onboarding, discover, mutual like -> match,
+  messages + read, Date Ready full flow to REVEALED (match date was moved back in DB instead of
+  changing config), report and delete account.
+- Not yet done: automated backend tests (needs Docker for Testcontainers), WebSocket check,
+  nothing tested on a phone yet.
 
 ## 6. Next immediate step (start here)
 
-1. `cd backend && mvn -q compile` → fix any errors.
-2. `docker compose up -d` then `DEV_LOGIN_ENABLED=true mvn spring-boot:run` → fix startup errors
-   (Flyway + Hibernate `ddl-auto: validate` must pass).
-3. Smoke-test APIs with dev-login (README has curl examples): onboarding → discover with two users
-   → like both ways → match → messages → Date Ready (temporarily lower
-   `app.date-ready.min-days-after-match` / `min-messages` for testing).
+1. ~~Compile~~ — done, passes.
+2. ~~Startup~~ — done, Flyway + Hibernate validate pass.
+3. ~~Smoke-test APIs~~ — done (REST flow). Still to check: WebSocket `/ws` live events.
 4. Add backend tests (Testcontainers PostgreSQL) for match creation and the Date Ready flow.
 5. Update `CODE_GUIDE.md` and this file, commit in Bharti's name.
 

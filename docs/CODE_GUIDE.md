@@ -333,3 +333,16 @@ Har package already ek boundary hai:
 | safety-service | `safety` | blocks, reports |
 
 Badlav: services ek dusre ko direct call ki jagah **Kafka events** bhejengi (`MatchCreated`, `UserBlocked`, `MessageSent`), WebSocket ke liye RabbitMQ/Redis broker, aur aage ek API Gateway.
+
+---
+
+## 10. Backend ko local test kaise kiya (2026-11-09)
+
+Is din koi code nahi badla; sirf pehli baar compile + run + API smoke test kiya. Kaam ki baatein:
+
+- `mvn compile` aur `spring-boot:run` bina error ke chale. Flyway ne V1 + V2 chalayi aur Hibernate `validate` pass hua.
+- Testing ke time enum values yaad rakho: `Gender` = `MAN | WOMAN | NON_BINARY`, `InterestedIn` = `MEN | WOMEN | EVERYONE`. Galat value pe `400 "Request ka format galat hai"` aata hai.
+- Date Ready ke liye 7 din wait nahi karna: DB mein match ka `matched_at` peeche kar do,
+  `update matches set matched_at = now() - interval '8 days' where id = <matchId>;` (config `application.yml` chhedne ki zaroorat nahi).
+- Dev login se do users banao, dono ka onboarding karo (`/api/me/basic`, `/intent`, `/profile`, `/photos`, `/location`, `/complete`), phir like both ways -> match -> messages -> Date Ready.
+- Dhyan do: path variable galat ho (jaise `/api/matches/null/messages`) to abhi `500` aata hai, `400` nahi. Ye chhota improvement hai jo baad mein `GlobalExceptionHandler` mein ho sakta hai.
