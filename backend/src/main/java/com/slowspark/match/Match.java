@@ -12,7 +12,7 @@ import java.time.Instant;
  * Two users who liked each other. user1Id is always the smaller id,
  * so the same pair can never get two rows.
  */
-@Entity
+@Entity(name = "UserMatch") // "Match" alone can clash with query keywords, so the JPQL name is UserMatch
 @Table(name = "matches")
 @Getter
 @Setter

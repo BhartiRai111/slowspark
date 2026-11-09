@@ -12,9 +12,13 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
     Optional<Match> findByUser1IdAndUser2Id(Long user1Id, Long user2Id);
 
     @Query("""
-            select m from Match m
-            where (m.user1Id = :me or m.user2Id = :me) and m.status = com.slowspark.match.Match.Status.ACTIVE
+            select m from UserMatch m
+            where (m.user1Id = :me or m.user2Id = :me) and m.status = :status
             order by m.matchedAt desc
             """)
-    List<Match> findActiveFor(@Param("me") Long me);
+    List<Match> findForUser(@Param("me") Long me, @Param("status") Match.Status status);
+
+    default List<Match> findActiveFor(Long me) {
+        return findForUser(me, Match.Status.ACTIVE);
+    }
 }
