@@ -15,6 +15,7 @@ What makes it different:
 | Photos | Cloudinary (uploaded straight from the phone) |
 
 Code walkthrough (which file does what, and why): **[docs/CODE_GUIDE.md](docs/CODE_GUIDE.md)**
+Project decisions, status and next steps: **[docs/PROJECT_CONTEXT.md](docs/PROJECT_CONTEXT.md)**
 
 ---
 
