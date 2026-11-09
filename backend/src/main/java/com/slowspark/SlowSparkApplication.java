@@ -1,0 +1,14 @@
+package com.slowspark;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+@SpringBootApplication
+@EnableScheduling // needed for the job that expires old Date Ready requests
+public class SlowSparkApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SlowSparkApplication.class, args);
+    }
+}

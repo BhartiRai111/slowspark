@@ -1,0 +1,17 @@
+# Local PostgreSQL for development.
+# Run: docker compose up -d
+services:
+  postgres:
+    image: postgres:17
+    container_name: slowspark-db
+    environment:
+      POSTGRES_DB: slowspark
+      POSTGRES_USER: slowspark
+      POSTGRES_PASSWORD: slowspark
+    ports:
+      - "5432:5432"
+    volumes:
+      - slowspark-data:/var/lib/postgresql/data
+
+volumes:
+  slowspark-data:
